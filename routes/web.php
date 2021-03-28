@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UtilizadorController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CorController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,3 +53,11 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 /* ===================================== Session ========================================*/
 Route::get('session', [SessionController::class, 'session'])->name('session');
 /* ====================X=============== Session ====================X====================*/
+
+
+/*======================= Cores routes =========================================*/
+Route::get('/cor', [CorController::class, 'index'])->name('cor');
+Route::post('/addCor', [CorController::class, 'store'])->name('addCor');
+Route::delete('/delCor', [CorController::class, 'destroy'])->name('delCor');
+Route::put('/editCor', [CorController::class, 'update']);
+/*=====================X============= Cores routes ==================X==================*/

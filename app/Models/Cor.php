@@ -10,4 +10,5 @@ class Cor extends Model
     use HasFactory;
 
     protected $table = 'cor';
+    protected $fillable = ['nome', 'descrição','data'];
 }

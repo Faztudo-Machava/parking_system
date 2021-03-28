@@ -22,7 +22,7 @@ $(document).ready(function(){
         $('#editar').modal('show');
     })
 
-    $('#formAddCliente').on('submit', function(e){
+    /*$('#formAddCliente').on('submit', function(e){
         e.preventDefault();
 
         $.ajax({
@@ -39,7 +39,7 @@ $(document).ready(function(){
                 alert("Cliente não cadatrado, algo correu mal.");
             }
         })
-    })
+    })*/
 
 
     //----------------------------Eliminar---------------------------------

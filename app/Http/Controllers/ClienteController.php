@@ -51,6 +51,7 @@ class ClienteController extends Controller
         $cliente->saldo = $request->input('saldo');
         $cliente->data = now();
         $cliente->save();
+        return redirect()->route('cliente');
     }
 
     /**

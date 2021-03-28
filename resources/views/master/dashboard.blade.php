@@ -73,7 +73,7 @@
                     <i class = "fas fa-fw fa-cog">T</i>
                     <span>Tipos de viatura</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
+                <a class="nav-link " href="{{route('cor')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="bi bi-palette"></i>
                     <span>Cores de viatura</span>
