@@ -6,7 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UtilizadorController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CorController;
+use App\Http\Controllers\FabricanteController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TipoViaturaController;
+use App\Http\Controllers\VagaController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -61,3 +64,26 @@ Route::post('/addCor', [CorController::class, 'store'])->name('addCor');
 Route::delete('/delCor', [CorController::class, 'destroy'])->name('delCor');
 Route::put('/editCor', [CorController::class, 'update']);
 /*=====================X============= Cores routes ==================X==================*/
+
+/*======================= Tipo de viatura routes =========================================*/
+Route::get('/tipo', [TipoViaturaController::class, 'index'])->name('tipo');
+Route::post('/addTipo', [TipoViaturaController::class, 'store'])->name('addTipo');
+Route::delete('/delTipo', [TipoViaturaController::class, 'destroy'])->name('delTipo');
+Route::put('/editTipo', [TipoViaturaController::class, 'update'])->name('editTipo');
+/*=====================X============= Cores routes ==================X==================*/
+
+
+/*======================= Fabricante de viatura routes =========================================*/
+Route::get('/fabricante', [FabricanteController::class, 'index'])->name('fabricante');
+Route::post('/addFabricante', [FabricanteController::class, 'store'])->name('addFabricante');
+Route::delete('/delFabricante', [FabricanteController::class, 'destroy'])->name('delFabricante');
+Route::put('/editFabricante', [FabricanteController::class, 'update'])->name('editFabricante');
+/*=====================X============= Fabricante de viatura routes ==================X==================*/
+
+
+/*=======================  vaga routes =========================================*/
+Route::get('/vaga', [VagaController::class, 'index'])->name('vaga');
+Route::post('/addVaga', [VagaController::class, 'store'])->name('addVaga');
+Route::delete('/delVaga', [VagaController::class, 'destroy'])->name('delVaga');
+Route::put('/editVaga', [VagaController::class, 'update'])->name('editVaga');
+/*=====================X============= vaga routes ==================X==================*/

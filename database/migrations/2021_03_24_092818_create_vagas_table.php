@@ -15,9 +15,10 @@ class CreateVagasTable extends Migration
     {
         Schema::create('vaga', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 20)->nullable(false);
+            $table->string('nome', 20)->nullable(false)->unique();
             $table->text('descrição');
             $table->double('valor')->default(0);
+            $table->string('categoria')->nullable(false);
             $table->tinyInteger('estado')->default(1);
             $table->date('data');
             $table->timestamps();

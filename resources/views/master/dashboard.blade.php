@@ -58,7 +58,7 @@
                     <i class="bi bi-truck"></i>
                     <span>Viatura</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
+                <a class="nav-link " href="{{route('vaga')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="bi bi-slash-circle"></i>
                     <span>Vaga</span>
@@ -68,10 +68,15 @@
                     <i class="fas fa-fw fa-cog">M</i>
                     <span>Modelos de viatura</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
+                <a class="nav-link " href="{{route('tipo')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class = "fas fa-fw fa-cog">T</i>
                     <span>Tipos de viatura</span>
+                </a>
+                <a class="nav-link " href="{{route('fabricante')}}" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i>F</i>
+                    <span>Fabricante</span>
                 </a>
                 <a class="nav-link " href="{{route('cor')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
