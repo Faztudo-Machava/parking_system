@@ -1,7 +1,7 @@
 @extends('master.dashboard')
 
 @section('css')
-<link href="{{asset('css/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('titulo')
@@ -10,7 +10,7 @@
 
 @section('conteudo')
     <!-- Modal -->
-    <form id="formAddCliente" method="POST" action="{{route('addCliente')}}">
+    <form id="formAddCliente" method="POST" action="{{ route('addCliente') }}">
         <div class="modal fade" id="cadCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             {{ csrf_field() }}
             <div class="modal-dialog">
@@ -59,16 +59,17 @@
 
 
     <!-- ================================== Editar=============================== -->
-    <form id="formUpdCliente" action="/editCliente" method="POST">
-        <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            {{ csrf_field() }}
-            {{ method_field('PUT') }}
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="lblModelAdd">Atualizar dados do cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lblModelAdd">Atualizar dados do cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formUpdCliente" action="/editCliente" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                     <div class="modal-body">
                         <div class="d-flex flex-row">
                             <div class="mb-3 me-3">
@@ -87,6 +88,7 @@
                             <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
                                 name="email">
                         </div>
+                        <input type="hidden" name="idCliente" id="idCliente">
                         <div class="mb-3">
                             <label for="jcGenero" class="form-label">Genero</label>
                             <select id="jcGenero" class="form-select" aria-label="Default select example" name="genero">
@@ -105,23 +107,26 @@
                         <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Atualizar</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
+
 
 
     <!-- =================================== Delete User =================================== -->
-    <form id="formDelCliente" action="/delCliente" method="POST">
-        <div class="modal fade" id="deletar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="lblModelAdd">Eliminar cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+
+    <div class="modal fade" id="deletar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lblModelAdd">Eliminar cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formDelCliente" action="/delCliente" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
                     <div class="modal-body">
                         <input type="hidden" name="_method" value="DELETE">
                         <P>Tem certeza que deseja eliminar este cliente?</P>
@@ -130,10 +135,11 @@
                         <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Confirmar</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
+
     <!-- ================================== Delete User ==================================== -->
 
 
@@ -147,16 +153,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="EmailLog" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="EmailLog" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Confirmar password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <label for="passLog" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="passLog">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -179,10 +181,10 @@
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="text-center col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                    Total de clientes</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $numTotal }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -195,10 +197,10 @@
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="text-center col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                    Total de clientes ativos</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $listaClientesAtivos }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -211,26 +213,10 @@
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
+                            <div class="text-center col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                    Total de clientes inativos</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $listaClientesInativos }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -247,31 +233,32 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    @csrf
                     <table class="table table-bordered" id="tabelaCliente" width="100%">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Apelido</th>
-                                <th>Genero</th>
-                                <th>Email</th>
-                                <th>Saldo</th>
-                                <th>Estado</th>
-                                <th>Data de chegada</th>
-                                <th colspan="3">Acções</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Apelido</th>
+                                <th scope="col">Genero</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Saldo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Data de chegada</th>
+                                <th scope="col">Acções</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <td>Codigo</td>
-                                <td>Nome</td>
-                                <td>Apelido</td>
-                                <td>Genero</td>
-                                <td>Email</td>
-                                <td>Saldo</td>
-                                <td>Estado</td>
-                                <td>Data de chegada</td>
-                                <td colspan="3">Acções</td>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Apelido</th>
+                                <th scope="col">Genero</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Saldo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Data de chegada</th>
+                                <th scope="col">Acções</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -286,15 +273,9 @@
                                     <td>{{ $cliente->estado == 1 ? 'Ativo' : 'Inativo' }}</td>
                                     <td>{{ $cliente->data }}</td>
                                     <td>
-                                        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#visualizar"><i class="bi bi-eye-fill"></i></button>
-                                    </td>
-                                    <td>
-                                        <button id="btnEditar" class="btn btn-primary btnEditar"
-                                            data-bs-toggle="modal" data-bs-target="#editar"><i
-                                                class="bi bi-pencil-square"></i></button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger btnEliminar"><i class="bi bi-trash"></i></button>
+                                        <a href="#" class="btn btn-primary btnEditar"><i
+                                                class="bi bi-pencil-square"></i></a>
+                                        <a href="#" class="btn btn-danger btnEliminar"><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -307,5 +288,5 @@
 @endsection
 
 @push('javascript')
-<script src="{{asset('js/Cliente.js')}}"></script>
+    <script src="{{ asset('js/Cliente.js') }}"></script>
 @endpush

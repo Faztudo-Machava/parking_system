@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vaga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VagaController extends Controller
 {
@@ -20,7 +21,13 @@ class VagaController extends Controller
     public function index()
     {
         $vaga = $this->objVaga->all();
-        return view('dashboard.dashVaga', compact('vaga'));
+        $total = $this->objVaga->all()->count();
+        $totalLigeiro = $this->objVaga->all()->where('categoria', '=', 'ligeiro')->count();
+        $totalPesado = $this->objVaga->all()->where('categoria', '=', 'pesado')->count();
+        $pesadoLivre = $this->objVaga->all()->where('categoria', '=', 'pesado')->where('estado', '=' ,1)->count();
+        $ligeiroLivre = $this->objVaga->all()->where('categoria', '=', 'ligeiro')->where('estado', '=' ,1)->count();
+        $vagasOcupadas = $this->objVaga->all()->where('estado', '=' ,0)->count();
+        return view('dashboard.dashVaga', compact('vaga', 'total','totalLigeiro','totalPesado','pesadoLivre', 'ligeiroLivre', 'vagasOcupadas'));
     }
 
     /**
@@ -99,9 +106,7 @@ class VagaController extends Controller
      */
     public function destroy($id)
     {
-        $vaga = Vaga::find($id);
-        $vaga->delete;
-
+        DB::delete('Delete from vaga where id = ?', [$id]);
         return redirect()->route('vaga')->with('Sucess', 'eliminado');
     }
 }

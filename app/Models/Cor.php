@@ -11,4 +11,8 @@ class Cor extends Model
 
     protected $table = 'cor';
     protected $fillable = ['nome', 'descrição','data'];
+
+    public function relViatura(){
+        return $this->hasMany('App\Models\Viatura','cor');
+    }
 }

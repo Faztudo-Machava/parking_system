@@ -114,8 +114,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                    Numero total de tipos de viaturas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalTipos}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -124,55 +124,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Saldo</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -187,18 +138,9 @@
                                 <th>Nome</th>
                                 <th>Descrição</th>
                                 <th>Data de registo</th>
-                                <th colspan="3">Acções</th>
+                                <th colspan="2">Acções</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Data de registo</th>
-                                <th colspan="3">Acções</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
                             @foreach ($tipo as $tipos)
                                 <tr>
@@ -207,14 +149,11 @@
                                     <td>{{ $tipos->descrição }}</td>
                                     <td>{{ $tipos->data }}</td>
                                     <td>
-                                        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#visualizar"><i class="bi bi-eye-fill"></i></button>
-                                    </td>
-                                    <td>
                                         <button id="btnEditar" class="btn btn-primary btnEditar"
                                             data-bs-toggle="modal" data-bs-target="#editar"><i  class="bi bi-pencil-square"></i></button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger btnEliminar" data-bs-toggle="modal" data-bs-target="#deletar"><i class="bi bi-trash"></i></button>
+                                        <a href="/delTipo/{{$tipos->id}}" class="btn btn-danger btnEliminar" ><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

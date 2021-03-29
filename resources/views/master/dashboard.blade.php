@@ -8,7 +8,7 @@
     <link href="{{asset('site/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('css/index.css')}}" rel="stylesheet">
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{ asset('dashboard/css/dash2.css') }}" rel="stylesheet">
+    <link href="{{asset('dashboard/css/dash2.css') }}" rel="stylesheet">
     <link href="{{asset('bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
     @yield('css')
     <title>@yield('titulo')</title>
@@ -22,10 +22,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
-                <div class="sidebar-brand-icon rotate-n-15">
+                <div class="sidebar-brand-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">VERDANT</div>
+                <div class="sidebar-brand-text mx-4">VERDANT</div>
             </a>
 
             <!-- Divider -->
@@ -53,7 +53,7 @@
                     <i class="bi bi-person"></i>
                     <span>Cliente</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
+                <a class="nav-link " href="{{route('viatura')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="bi bi-truck"></i>
                     <span>Viatura</span>
@@ -63,7 +63,7 @@
                     <i class="bi bi-slash-circle"></i>
                     <span>Vaga</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
+                <a class="nav-link " href="{{route('modelo')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog">M</i>
                     <span>Modelos de viatura</span>
@@ -161,32 +161,18 @@
                             </div>
                         </li>
 
+                        <a class="btn btn-primary" href="{{route('logout')}}">
+                            Logout
+                        </a>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Faztudo Machava</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session('user')->Nome}}</span>
                                 <img class="img-profile rounded-circle" src="{{asset('assets/undraw_profile.svg')}}">
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
                         </li>
 
                     </ul>
@@ -200,12 +186,18 @@
 
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
+
+    <script src="{{ asset('site/jquery.js') }}"></script>
     <script src="{{ asset('site/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('js/jquery.tabledit.js')}}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js')}}"></script>
     <script src="{{ asset('site/bootstrap.js') }}"></script>
     <script src="{{ asset('dashboard/js/dash2.js') }}"></script>
-
+    <script>
+        $(document).ready(function(){
+            $('.table').DataTable();
+        })
+    </script>
     @stack('javascript')
     <!-- Core plugin JavaScript
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>-->
@@ -218,6 +210,8 @@
     <!-- Page level custom scripts
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>-->
+
+    
 </body>
 
 </html>

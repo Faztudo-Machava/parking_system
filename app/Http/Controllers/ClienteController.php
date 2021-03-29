@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -20,9 +21,11 @@ class ClienteController extends Controller
      */
     public function index()
     {
-
+        $listaClientesAtivos = $this->objCliente->all()->where('estado', '=', 1)->count();
+        $listaClientesInativos = $this->objCliente->all()->where('estado', '=', 0)->count();
+        $numTotal = $this->objCliente->all()->count();
         $clientes = $this->objCliente->all();
-        return view('dashboard.dashCliente', compact('clientes'));
+        return view('dashboard.dashCliente', compact('clientes', 'numTotal', 'listaClientesAtivos', 'listaClientesInativos'));
     }
 
     /**
@@ -45,7 +48,7 @@ class ClienteController extends Controller
     {
         $cliente = new Cliente();
         $cliente->nome = $request->input('nome');
-        $cliente->apelido = $request->input('saldo');
+        $cliente->apelido = $request->input('apelido');
         $cliente->email = $request->input('email');
         $cliente->genero = $request->input('genero');
         $cliente->saldo = $request->input('saldo');
@@ -93,6 +96,7 @@ class ClienteController extends Controller
         $cliente->saldo = $request->input('saldo');
         $cliente->data = now();
         $cliente->save();
+        return redirect('/cliente')->with('Sucess', 'Atualizado');
     }
 
     /**
@@ -103,9 +107,7 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Cliente::find($id);
-        $cliente->delete;
-
+        DB::delete('Delete from cliente where id = ?', [$id]);
         return redirect('/cliente')->with('Sucess', 'eliminado');
     }
 

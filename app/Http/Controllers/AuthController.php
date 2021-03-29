@@ -12,7 +12,9 @@ class AuthController extends Controller
 {
     public function dashboard(){
         if(Auth::check()){
-            return view('dashboard.dashboard');
+            $user = Auth::user();
+            session(['user' => $user]);
+            return view('master.dashboard');
         }
         return redirect()->route('home');
     }
@@ -36,6 +38,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
+        Session::forget('user');
         Auth::logout();
         return redirect()->route('home');
     }

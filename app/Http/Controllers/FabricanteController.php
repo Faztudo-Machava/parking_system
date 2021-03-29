@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fabricante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FabricanteController extends Controller
 {
@@ -20,7 +21,8 @@ class FabricanteController extends Controller
     public function index()
     {
         $fabricante = $this->objFabricante->all();
-        return view('dashboard.dashFabricante', compact('fabricante'));
+        $totalFabricantes = $this->objFabricante->all()->count();
+        return view('dashboard.dashFabricante', compact('fabricante', 'totalFabricantes'));
     }
 
     /**
@@ -95,9 +97,7 @@ class FabricanteController extends Controller
      */
     public function destroy($id)
     {
-        $fabricante = Fabricante::find($id);
-        $fabricante->delete;
-
+        DB::delete('Delete from fabricante where id = ?', [$id]);
         return redirect()->route('fabricante')->with('Sucess', 'eliminado');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CorController extends Controller
 {
@@ -20,7 +21,8 @@ class CorController extends Controller
     public function index()
     {
         $cor = $this->objCor->all();
-        return view('dashboard.dashCor', compact('cor'));
+        $totalCor = $this->objCor->all()->count();
+        return view('dashboard.dashCor', compact('cor', 'totalCor'));
     }
 
     /**
@@ -95,9 +97,7 @@ class CorController extends Controller
      */
     public function destroy($id)
     {
-        $cor = Cor::find($id);
-        $cor->delete;
-
+        DB::delete('Delete from cor where id = ?', [$id]);
         return redirect()->route('cor')->with('Sucess', 'eliminado');
     }
 }

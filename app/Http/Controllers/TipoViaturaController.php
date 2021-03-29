@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoViatura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TipoViaturaController extends Controller
 {
@@ -20,7 +21,8 @@ class TipoViaturaController extends Controller
     public function index()
     {
         $tipo = $this->objTipo->all();
-        return view('dashboard.dashTipo', compact('tipo'));
+        $totalTipos = $this->objTipo->all()->count();
+        return view('dashboard.dashTipo', compact('tipo', 'totalTipos'));
     }
 
     /**
@@ -95,9 +97,7 @@ class TipoViaturaController extends Controller
      */
     public function destroy($id)
     {
-        $tipo = TipoViatura::find($id);
-        $tipo->delete;
-
+        DB::delete('Delete from tipo_viatura where id = ?', [$id]);
         return redirect()->route('tipo')->with('Sucess', 'eliminado');
     }
 }

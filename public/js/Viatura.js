@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var tabela = $('#tabelaCliente').DataTable();
+    var tabela = $('#tabelaViatura').DataTable();
     tabela.on('click','.btnEditar', function(){
         $tr = $(this).closest('tr');
         if($($tr).hasClass('child')){
@@ -9,12 +9,11 @@ $(document).ready(function(){
         var dados = tabela.row($tr).data();
         console.log(dados);
 
-        $('#txtNome').val(dados[1]);
-        $('#txtApelido').val(dados[2]);
-        $('#txtEmail').val(dados[4]);
-        $('#jcGenero').val(dados[3]);
-        $('#txtSaldo').val(dados[5]);
-        $('#formUpdCliente').attr('action', '/editCliente/'+dados[0])
+        $('#modelo').val(dados[1]);
+        $('#tipo').val(dados[2]);
+        $('#cor').val(dados[3]);
+        $('#categoria').val(dados[4]);
+        $('#formUpdViatura').attr('action', '/editViatura/'+dados[0])
         $('#edit').modal('show');
     })
 
@@ -48,7 +47,7 @@ $(document).ready(function(){
         var dados = tabela.row($tr).data();
         console.log(dados);
 
-        $('#formDelCliente').attr('action', '/delCliente/'+dados[0])
+        $('#formDelViatura').attr('action', '/delViatura/'+dados[0])
         $('#deletar').modal('show');
     })
 

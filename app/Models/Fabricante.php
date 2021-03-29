@@ -11,4 +11,8 @@ class Fabricante extends Model
 
     protected $table = 'fabricante';
     protected $fillable = ['nome', 'descrição','data'];
+
+    public function relModelo(){
+        return $this->hasMany('App\Models\Modelo','fabricante');
+    }
 }

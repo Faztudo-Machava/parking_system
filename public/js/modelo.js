@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var tabela = $('#tabelaCliente').DataTable();
+    var tabela = $('#tabelaModelo').DataTable();
     tabela.on('click','.btnEditar', function(){
         $tr = $(this).closest('tr');
         if($($tr).hasClass('child')){
@@ -10,11 +10,9 @@ $(document).ready(function(){
         console.log(dados);
 
         $('#txtNome').val(dados[1]);
-        $('#txtApelido').val(dados[2]);
-        $('#txtEmail').val(dados[4]);
-        $('#jcGenero').val(dados[3]);
-        $('#txtSaldo').val(dados[5]);
-        $('#formUpdCliente').attr('action', '/editCliente/'+dados[0])
+        $('#jcFabricantes').val(dados[2]);
+        $('#txtDescricao').val(dados[3]);
+        $('#formUpdModelo').attr('action', '/editModelo/'+dados[0])
         $('#edit').modal('show');
     })
 
@@ -48,7 +46,7 @@ $(document).ready(function(){
         var dados = tabela.row($tr).data();
         console.log(dados);
 
-        $('#formDelCliente').attr('action', '/delCliente/'+dados[0])
+        $('#formDelModelo').attr('action', '/delModelo/'+dados[0])
         $('#deletar').modal('show');
     })
 
