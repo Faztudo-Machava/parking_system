@@ -23,16 +23,16 @@
                         <div class="d-flex flex-row">
                             <div class="mb-3 me-3">
                                 <label for="txtNome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="nome">
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="nome" required>
                             </div>
                             <div class="mb-3">
                                 <label for="txtApelido" class="form-label">Apelido</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="apelido">
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="apelido" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="txtEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="jcGenero" class="form-label">Genero</label>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtSaldo" class="form-label">Saldo</label>
-                            <input type="number" class="form-control" aria-describedby="emailHelp" name="saldo">
+                            <input type="number" class="form-control" aria-describedby="emailHelp" name="saldo" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -74,19 +74,16 @@
                         <div class="d-flex flex-row">
                             <div class="mb-3 me-3">
                                 <label for="txtNome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="txtNome" aria-describedby="emailHelp"
-                                    name="nome">
+                                <input type="text" class="form-control" id="txtNome" aria-describedby="emailHelp" name="nome" required>
                             </div>
                             <div class="mb-3">
                                 <label for="txtApelido" class="form-label">Apelido</label>
-                                <input type="text" class="form-control" id="txtApelido" aria-describedby="emailHelp"
-                                    name="apelido">
+                                <input type="text" class="form-control" id="txtApelido" aria-describedby="emailHelp" name="apelido" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="txtEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp"
-                                name="email">
+                            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" name="email" required>
                         </div>
                         <input type="hidden" name="idCliente" id="idCliente">
                         <div class="mb-3">
@@ -99,8 +96,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtSaldo" class="form-label">Saldo</label>
-                            <input type="number" class="form-control" id="txtSaldo" aria-describedby="emailHelp"
-                                name="saldo">
+                            <input type="number" class="form-control" id="txtSaldo" aria-describedby="emailHelp" name="saldo" required>
                         </div>
                     </div>
                     <div class="modal-footer">

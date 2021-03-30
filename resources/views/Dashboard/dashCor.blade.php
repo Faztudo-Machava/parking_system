@@ -22,11 +22,11 @@
                     <div class="modal-body">
                         <div class="mb-3 me-3">
                             <label for="txtNome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" name="nome">
+                            <input type="text" class="form-control" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="txtDescricao" class="form-label">Descrição</label>
-                            <textarea type="text" class="form-control" name="descricao"></textarea>
+                            <textarea type="text" class="form-control" name="descricao" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -55,11 +55,11 @@
                     <div class="modal-body">
                         <div class="mb-3 me-3">
                             <label for="txtNome" class="form-label">Nome</label>
-                            <input type="text" id="txtNome" class="form-control" name="nome">
+                            <input type="text" id="txtNome" class="form-control" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="txtDescricao" class="form-label">Descrição</label>
-                            <textarea type="text" id="txtDescricao" class="form-control" name="descricao"></textarea>
+                            <textarea type="text" id="txtDescricao" class="form-control" name="descricao" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -70,7 +70,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- =================================== Delete User =================================== -->
 
@@ -143,6 +142,15 @@
                                 <th>Acções</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Data de registo</th>
+                                <th>Acções</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                             @foreach ($cor as $cores)
                                 <tr>

@@ -22,11 +22,11 @@
                     <div class="modal-body">
                         <div class="mb-3 me-3">
                             <label for="txtNome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" name="nome">
+                            <input type="text" class="form-control" name="nome" required>
                         </div>
                         <div class="mb-3 me-3">
                             <label for="txtValor" class="form-label">Valor</label>
-                            <input type="number" class="form-control" name="valor">
+                            <input type="number" class="form-control" name="valor" required>
                         </div>
                         <div class="mb-3">
                             <label for="jcCategoria" class="form-label">Categoria</label>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtDescricao" class="form-label">Descrição</label>
-                            <textarea type="text" class="form-control" name="descricao"></textarea>
+                            <textarea type="text" class="form-control" name="descricao" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -68,11 +68,11 @@
                     <div class="modal-body">
                         <div class="mb-3 me-3">
                             <label for="txtNome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" name="nome" id="txtNome">
+                            <input type="text" class="form-control" name="nome" id="txtNome" required>
                         </div>
                         <div class="mb-3 me-3">
                             <label for="txtValor" class="form-label">Valor</label>
-                            <input type="number" class="form-control" name="valor" id="txtValor">
+                            <input type="number" class="form-control" name="valor" id="txtValor" required>
                         </div>
                         <div class="mb-3">
                             <label for="jcCategoria" class="form-label">Categoria</label>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtDescricao" class="form-label">Descrição</label>
-                            <textarea class="form-control" name="descricao" id="txtDescrição"></textarea>
+                            <textarea class="form-control" name="descricao" id="txtDescrição" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

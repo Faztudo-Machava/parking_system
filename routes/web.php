@@ -32,7 +32,11 @@ Route::get('/', [HomeController::class, 'homepage'])->name('home');
 
 
 /*======================== Utilizador routes ==================================*/
-Route::get('/Registar', [UtilizadorController::class, 'create'])->name('registarUser');
+Route::get('/utilizador', [UtilizadorController::class, 'index'])->name('utilizador');
+Route::post('/addUtilizadorAdmin', [UtilizadorController::class, 'storeAdmin'])->name('addUtilizador');
+Route::post('/addUtilizadorCliente', [UtilizadorController::class, 'storeCliente'])->name('addUtilizador');
+Route::delete('/delUtilizador/{id}', [UtilizadorController::class, 'destroy']);
+Route::put('/editUtilizador/{id}', [UtilizadorController::class, 'update']);
 /*============X=========== Utilizador routes ================X=================*/
 
 

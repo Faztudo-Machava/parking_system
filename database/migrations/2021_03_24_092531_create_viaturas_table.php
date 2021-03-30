@@ -19,6 +19,7 @@ class CreateViaturasTable extends Migration
             $table->foreignId('modelo')->nullable(false)->constrained('modelo', 'id');
             $table->foreignId('cor')->nullable(false)->constrained('cor','id');
             $table->tinyInteger('estado')->default(1);
+            $table->string('Categoria', 20)->nullable(false);
             $table->date('data');
             $table->timestamps();
         });

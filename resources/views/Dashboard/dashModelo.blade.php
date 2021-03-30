@@ -22,7 +22,7 @@
                     <div class="modal-body">
                         <div class="mb-3 me-3">
                             <label for="txtNome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" name="nome">
+                            <input type="text" class="form-control" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="jcFabricantes" class="form-label">Fabricante</label>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtDescricao" class="form-label">Descrição</label>
-                            <textarea type="text" class="form-control" name="descricao"></textarea>
+                            <textarea type="text" class="form-control" name="descricao" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -66,7 +66,7 @@
 
                         <div class="mb-3 me-3">
                             <label for="txtNome" class="form-label">Nome</label>
-                            <input type="text" id="txtNome" class="form-control" name="nome">
+                            <input type="text" id="txtNome" class="form-control" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="jcFabricantes" class="form-label">Fabricante</label>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtDescricao" class="form-label">Descrição</label>
-                            <textarea type="text" id="txtDescricao" class="form-control" name="descricao"></textarea>
+                            <textarea type="text" id="txtDescricao" class="form-control" name="descricao" required></textarea>
                         </div>
 
                     </div>
@@ -94,9 +94,9 @@
     </div>
 
     <!-- =================================== Delete User =================================== -->
-    
+
         <div class="modal fade" id="deletar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            
+
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

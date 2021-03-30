@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link " href="#" data-target="#collapseTwo"
+                <a class="nav-link " href="{{route('utilizador')}}" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="bi bi-person-circle"></i>
                     <span>Utilizadores</span>
@@ -211,7 +211,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>-->
 
-    
+
 </body>
 
 </html>

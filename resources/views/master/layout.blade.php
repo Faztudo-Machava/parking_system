@@ -28,20 +28,21 @@
       <div class="modal-body">
             <div class="mb-3">
                 <label for="txtEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" name="email">
+                <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="txtPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="txtPassword" name="password">
+                <input type="password" class="form-control" id="txtPassword" name="password" required>
             </div>
             <div class="mb-3">
                 <label for="confirmarPass" class="form-label">Confirmar password</label>
-                <input type="password" class="form-control" id="confirmarPass" name="confirmarPassword">
+                <input type="password" class="form-control" id="confirmarPass" name="confirmarPassword" required>
             </div>
+            <div class="alert alert-danger d-none passConfirmMessage" id="error"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn">Inscrever</button>
+        <button type="submit" class="btn" disabled>Inscrever</button>
       </div>
     </div>
   </div>
@@ -64,11 +65,11 @@
       <div class="modal-body">
             <div class="mb-3">
                 <label for="txtEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" name="email">
+                <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="txtPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="txtPassword" name="password">
+                <input type="password" class="form-control" id="txtPassword" name="password" required>
             </div>
       </div>
       <div class="modal-footer">

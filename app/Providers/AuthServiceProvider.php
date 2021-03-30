@@ -25,6 +25,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('AcessoAdmin',function($user){
+            return $user->admin === 1;
+        });
+        /*
+         *Para usar a gate
+         * if(Gate::allows('AcessoAdmin')){
+            dar acesso ao tal conteudo
+          } else{
+              bloquear acesso
+          }
+         *
+         */
+
     }
 }
