@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UtilizadorController extends Controller
@@ -22,13 +23,18 @@ class UtilizadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+
+     public function index()
+     {
+        if (Gate::allows('AcessoAdmin')){
         $utilizador = $this->objUtilizador->all();
         $totalUtilizadores = $this->objUtilizador->all()->count();
         $totalUtilizadoresAdmin = $this->objUtilizador->all()->where('admin', '=', 1)->count();
         $totalUtilizadoresCliente = $this->objUtilizador->all()->where('admin', '=', 0)->count();
         return view('dashboard.dashUtilizador', compact('utilizador', 'totalUtilizadores', 'totalUtilizadoresAdmin', 'totalUtilizadoresCliente'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -49,6 +55,7 @@ class UtilizadorController extends Controller
      */
     public function storeAdmin(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $utilizador = new User();
         $utilizador->nome = $request->input('nome');
         $utilizador->email = $request->input('email');
@@ -57,6 +64,9 @@ class UtilizadorController extends Controller
         $utilizador->password = Hash::make($request->input('password'));
         $utilizador->save();
         return redirect()->route('utilizador');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     public function storeCliente(Request $request)
@@ -73,12 +83,12 @@ class UtilizadorController extends Controller
                 $valor = 1;
                 $utilizador->nome = $cliente->nome;
                 $utilizador->save();
-                return redirect()->route('home.index');
+                return redirect()->route('home');
             }
         };
         if($valor == 0){
             echo "<script> alert('Ainda não é cliente do Palvic.') </script>";
-            return redirect()->route('home.index');
+            return redirect()->route('home');
         }
     }
 
@@ -113,11 +123,15 @@ class UtilizadorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $utilizador = User::find($id);
         $utilizador->nome = $request->input('nome');
         $utilizador->email = $request->input('email');
         $utilizador->save();
         return redirect()->route('utilizador');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -128,7 +142,11 @@ class UtilizadorController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from Utilizador where id = ?', [$id]);
         return redirect()->route('utilizador')->with('Sucess', 'eliminado');
+        }else{
+            return view('permission.permission');
+        }
     }
 }

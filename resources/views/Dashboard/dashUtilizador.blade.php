@@ -114,7 +114,7 @@
 
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Cores</h1>
+            <h1 class="h3 mb-0 text-gray-800">Utilizadores</h1>
             <button href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal"
                 data-bs-target="#adicionar"><i class="bi bi-person-plus"></i> Novo utilizador</button>
         </div>

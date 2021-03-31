@@ -6,6 +6,7 @@ use App\Models\Fabricante;
 use App\Models\Modelo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ModeloController extends Controller
 {
@@ -21,10 +22,14 @@ class ModeloController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('AcessoAdmin')){
         $modelo = $this->objModelo->all();
         $totalModelos = $this->objModelo->all()->count();
         $listaFabricantes = Fabricante::select('id','nome')->get();
         return view('dashboard.dashModelo', compact('modelo', 'listaFabricantes', 'totalModelos'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -45,6 +50,7 @@ class ModeloController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $modelo = new Modelo();
         $modelo->nome = $request->input('nome');
         $modelo->descrição = $request->input('descricao');
@@ -52,6 +58,9 @@ class ModeloController extends Controller
         $modelo->data = now();
         $modelo->save();
         return redirect()->route('modelo');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -85,12 +94,16 @@ class ModeloController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $modelo = Modelo::find($id);
         $modelo->nome = $request->input('nome');
         $modelo->descrição = $request->input('descricao');
         $modelo->fabricante = $request->input('fabricante');
         $modelo->save();
         return redirect()->route('modelo');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -101,7 +114,11 @@ class ModeloController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from modelo where id = ?', [$id]);
         return redirect()->route('modelo')->with('Sucess', 'eliminado');
+        }else{
+            return view('permission.permission');
+        }
     }
 }

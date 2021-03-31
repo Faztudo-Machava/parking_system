@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fabricante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class FabricanteController extends Controller
 {
@@ -20,9 +21,13 @@ class FabricanteController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('AcessoAdmin')){
         $fabricante = $this->objFabricante->all();
         $totalFabricantes = $this->objFabricante->all()->count();
         return view('dashboard.dashFabricante', compact('fabricante', 'totalFabricantes'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -43,12 +48,16 @@ class FabricanteController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $fabricante = new Fabricante();
         $fabricante->nome = $request->input('nome');
         $fabricante->descrição = $request->input('descricao');
         $fabricante->data = now();
         $fabricante->save();
         return redirect()->route('fabricante');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -82,11 +91,15 @@ class FabricanteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $fabricante = Fabricante::find($id);
         $fabricante->nome = $request->input('nome');
         $fabricante->descrição = $request->input('descricao');
         $fabricante->save();
         return redirect()->route('fabricante');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -97,7 +110,11 @@ class FabricanteController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from fabricante where id = ?', [$id]);
         return redirect()->route('fabricante')->with('Sucess', 'eliminado');
+        }else{
+            return view('permission.permission');
+        }
     }
 }

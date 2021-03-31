@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class CorController extends Controller
 {
@@ -20,9 +21,13 @@ class CorController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('AcessoAdmin')){
         $cor = $this->objCor->all();
         $totalCor = $this->objCor->all()->count();
         return view('dashboard.dashCor', compact('cor', 'totalCor'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -43,12 +48,16 @@ class CorController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $cor = new Cor();
         $cor->nome = $request->input('nome');
         $cor->descrição = $request->input('descricao');
         $cor->data = now();
         $cor->save();
         return redirect()->route('cor');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -82,11 +91,15 @@ class CorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $cor = Cor::find($id);
         $cor->nome = $request->input('nome');
         $cor->descrição = $request->input('descricao');
         $cor->save();
         return redirect()->route('cor');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -97,7 +110,11 @@ class CorController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from cor where id = ?', [$id]);
         return redirect()->route('cor')->with('Sucess', 'eliminado');
+        }else{
+            return view('permission.permission');
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vaga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class VagaController extends Controller
 {
@@ -20,6 +21,7 @@ class VagaController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('AcessoAdmin')){
         $vaga = $this->objVaga->all();
         $total = $this->objVaga->all()->count();
         $totalLigeiro = $this->objVaga->all()->where('categoria', '=', 'ligeiro')->count();
@@ -28,6 +30,9 @@ class VagaController extends Controller
         $ligeiroLivre = $this->objVaga->all()->where('categoria', '=', 'ligeiro')->where('estado', '=' ,1)->count();
         $vagasOcupadas = $this->objVaga->all()->where('estado', '=' ,0)->count();
         return view('dashboard.dashVaga', compact('vaga', 'total','totalLigeiro','totalPesado','pesadoLivre', 'ligeiroLivre', 'vagasOcupadas'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -48,6 +53,7 @@ class VagaController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $vaga = new Vaga();
         $vaga->nome = $request->input('nome');
         $vaga->valor = $request->input('valor');
@@ -56,6 +62,9 @@ class VagaController extends Controller
         $vaga->data = now();
         $vaga->save();
         return redirect()->route('vaga');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -89,6 +98,7 @@ class VagaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $vaga = Vaga::find($id);
         $vaga->nome = $request->input('nome');
         $vaga->valor = $request->input('valor');
@@ -96,6 +106,9 @@ class VagaController extends Controller
         $vaga->descrição = $request->input('descricao');
         $vaga->save();
         return redirect()->route('vaga');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -106,7 +119,11 @@ class VagaController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from vaga where id = ?', [$id]);
         return redirect()->route('vaga')->with('Sucess', 'eliminado');
+        }else{
+            return view('permission.permission');
+        }
     }
 }

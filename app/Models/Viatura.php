@@ -22,4 +22,8 @@ class Viatura extends Model
     public function relCor(){
         return $this->hasOne('App\Models\Cor','id','cor');
     }
+
+    public function relParqueamento(){
+        return $this->hasMany('App\Models\Parqueamento','viatura');
+    }
 }

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ClienteController extends Controller
 {
-    private $objUser;
     private $objCliente;
     public function __construct()
     {
@@ -21,11 +21,15 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('AcessoAdmin')){
         $listaClientesAtivos = $this->objCliente->all()->where('estado', '=', 1)->count();
         $listaClientesInativos = $this->objCliente->all()->where('estado', '=', 0)->count();
         $numTotal = $this->objCliente->all()->count();
         $clientes = $this->objCliente->all();
         return view('dashboard.dashCliente', compact('clientes', 'numTotal', 'listaClientesAtivos', 'listaClientesInativos'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -46,6 +50,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $cliente = new Cliente();
         $cliente->nome = $request->input('nome');
         $cliente->apelido = $request->input('apelido');
@@ -55,6 +60,9 @@ class ClienteController extends Controller
         $cliente->data = now();
         $cliente->save();
         return redirect()->route('cliente');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -88,15 +96,18 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $cliente = Cliente::find($id);
         $cliente->nome = $request->input('nome');
         $cliente->apelido = $request->input('saldo');
         $cliente->email = $request->input('email');
         $cliente->genero = $request->input('genero');
         $cliente->saldo = $request->input('saldo');
-        $cliente->data = now();
         $cliente->save();
         return redirect('/cliente')->with('Sucess', 'Atualizado');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -107,12 +118,11 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from cliente where id = ?', [$id]);
         return redirect('/cliente')->with('Sucess', 'eliminado');
-    }
-
-    public function cliente1(){
-        $clientes = $this->objCliente->all();
-        return view('cliente.cliente', compact('clientes'));
+        }else{
+            return view('permission.permission');
+        }
     }
 }

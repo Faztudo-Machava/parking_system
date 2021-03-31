@@ -11,4 +11,8 @@ class Cliente extends Model
 
     protected $table = 'cliente';
     protected $fillable = ['nome', 'apelido', 'email','saldo','genero','data'];
+
+    public function relParqueamento(){
+        return $this->hasMany('App\Models\Parqueamento','cliente');
+    }
 }

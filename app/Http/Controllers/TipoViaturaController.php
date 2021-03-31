@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TipoViatura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class TipoViaturaController extends Controller
 {
@@ -20,9 +21,13 @@ class TipoViaturaController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('AcessoAdmin')){
         $tipo = $this->objTipo->all();
         $totalTipos = $this->objTipo->all()->count();
         return view('dashboard.dashTipo', compact('tipo', 'totalTipos'));
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -43,12 +48,16 @@ class TipoViaturaController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $tipo = new TipoViatura();
         $tipo->nome = $request->input('nome');
         $tipo->descrição = $request->input('descricao');
         $tipo->data = now();
         $tipo->save();
         return redirect()->route('tipo');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -82,11 +91,16 @@ class TipoViaturaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $tipo = TipoViatura::find($id);
         $tipo->nome = $request->input('nome');
         $tipo->descrição = $request->input('descricao');
         $tipo->save();
         return redirect()->route('tipo');
+        }
+        else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -97,7 +111,12 @@ class TipoViaturaController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from tipo_viatura where id = ?', [$id]);
         return redirect()->route('tipo')->with('Sucess', 'eliminado');
+        }
+        else{
+            return view('permission.permission');
+        }
     }
 }

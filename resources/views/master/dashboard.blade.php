@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{asset('site/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('css/index.css')}}" rel="stylesheet">
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{asset('dashboard/css/dash2.css') }}" rel="stylesheet">
-    <link href="{{asset('bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{ asset('site/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard/css/dash2.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     @yield('css')
     <title>@yield('titulo')</title>
 </head>
@@ -21,7 +21,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin') }}">
                 <div class="sidebar-brand-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
@@ -40,56 +40,57 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link " href="{{route('utilizador')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="bi bi-person-circle"></i>
-                    <span>Utilizadores</span>
-                </a>
-                <a class="nav-link" href="{{route('cliente')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="bi bi-person"></i>
-                    <span>Cliente</span>
-                </a>
-                <a class="nav-link " href="{{route('viatura')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="bi bi-truck"></i>
-                    <span>Viatura</span>
-                </a>
-                <a class="nav-link " href="{{route('vaga')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="bi bi-slash-circle"></i>
-                    <span>Vaga</span>
-                </a>
-                <a class="nav-link " href="{{route('modelo')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog">M</i>
-                    <span>Modelos de viatura</span>
-                </a>
-                <a class="nav-link " href="{{route('tipo')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class = "fas fa-fw fa-cog">T</i>
-                    <span>Tipos de viatura</span>
-                </a>
-                <a class="nav-link " href="{{route('fabricante')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i>F</i>
-                    <span>Fabricante</span>
-                </a>
-                <a class="nav-link " href="{{route('cor')}}" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="bi bi-palette"></i>
-                    <span>Cores de viatura</span>
-                </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                @if (Gate::allows('AcessoAdmin'))
+                    <a class="nav-link " href="{{ route('utilizador') }}" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="bi bi-person-circle"></i>
+                        <span>Utilizadores</span>
+                    </a>
+                    <a class="nav-link" href="{{ route('cliente') }}" data-target="#collapseTwo" aria-expanded="true"
+                        aria-controls="collapseTwo">
+                        <i class="bi bi-person"></i>
+                        <span>Cliente</span>
+                    </a>
+                    <a class="nav-link " href="{{ route('viatura') }}" data-target="#collapseTwo" aria-expanded="true"
+                        aria-controls="collapseTwo">
+                        <i class="bi bi-truck"></i>
+                        <span>Viatura</span>
+                    </a>
+                    <a class="nav-link " href="{{ route('vaga') }}" data-target="#collapseTwo" aria-expanded="true"
+                        aria-controls="collapseTwo">
+                        <i class="bi bi-slash-circle"></i>
+                        <span>Vaga</span>
+                    </a>
+                    <a class="nav-link " href="{{ route('modelo') }}" data-target="#collapseTwo" aria-expanded="true"
+                        aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog">M</i>
+                        <span>Modelos de viatura</span>
+                    </a>
+                    <a class="nav-link " href="{{ route('tipo') }}" data-target="#collapseTwo" aria-expanded="true"
+                        aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog">T</i>
+                        <span>Tipos de viatura</span>
+                    </a>
+                    <a class="nav-link " href="{{ route('fabricante') }}" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i>F</i>
+                        <span>Fabricante</span>
+                    </a>
+                    <a class="nav-link " href="{{ route('cor') }}" data-target="#collapseTwo" aria-expanded="true"
+                        aria-controls="collapseTwo">
+                        <i class="bi bi-palette"></i>
+                        <span>Cores de viatura</span>
+                    </a>
+                @endif
+                <a class="nav-link " href="{{ route('parqueamento') }}" data-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
                     <i class="bi bi-file-ppt"></i>
                     <span>Parqueamento</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link " href="#" data-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog">L</i>
                     <span>Levantamento</span>
                 </a>
@@ -161,7 +162,7 @@
                             </div>
                         </li>
 
-                        <a class="btn btn-primary" href="{{route('logout')}}">
+                        <a class="btn btn-primary" href="{{ route('logout') }}">
                             Logout
                         </a>
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -170,8 +171,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session('user')->Nome}}</span>
-                                <img class="img-profile rounded-circle" src="{{asset('assets/undraw_profile.svg')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ session('user')->Nome }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('assets/undraw_profile.svg') }}">
                             </a>
                         </li>
 
@@ -188,15 +190,16 @@
 
 
     <script src="{{ asset('site/jquery.js') }}"></script>
-    <script src="{{ asset('site/jquery.dataTables.js')}}"></script>
-    <script src="{{ asset('js/jquery.tabledit.js')}}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{ asset('site/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('js/jquery.tabledit.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('site/bootstrap.js') }}"></script>
     <script src="{{ asset('dashboard/js/dash2.js') }}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('.table').DataTable();
         })
+
     </script>
     @stack('javascript')
     <!-- Core plugin JavaScript

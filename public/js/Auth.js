@@ -16,4 +16,18 @@ $(function(){
             }
         })
     })
+
+})
+
+$('#confirmarPass').on('change',function(){
+    var pass = $('#tPassword').val();
+    var confirm = $('#confirmarPass').val();
+
+    if(pass == confirm){
+      $('#inscrever').removeAttr('disabled')
+      $('.messageBox').addClass('d-none').html("Esta palavra passe não corresponde a anterior")
+    }
+    else{
+      $('.messageBox').removeClass('d-none').html("Esta palavra passe não corresponde a anterior")
+    }
 })

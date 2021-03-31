@@ -10,4 +10,8 @@ class Vaga extends Model
     use HasFactory;
 
     protected $table = 'vaga';
+
+    public function relParqueamento(){
+        return $this->hasMany('App\Models\Vaga','vaga');
+    }
 }

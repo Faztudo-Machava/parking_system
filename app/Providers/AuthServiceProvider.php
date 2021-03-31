@@ -30,11 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         });
         /*
          *Para usar a gate
-         * if(Gate::allows('AcessoAdmin')){
-            dar acesso ao tal conteudo
-          } else{
-              bloquear acesso
-          }
+         *
          *
          */
 

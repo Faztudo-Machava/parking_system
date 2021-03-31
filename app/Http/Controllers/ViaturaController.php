@@ -8,6 +8,7 @@ use App\Models\TipoViatura;
 use App\Models\Viatura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ViaturaController extends Controller
 {
@@ -21,7 +22,9 @@ class ViaturaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $totalViaturas = $this->objViatura->all()->count();
+    {
+        if (Gate::allows('AcessoAdmin')){
+        $totalViaturas = $this->objViatura->all()->count();
         $totalViaturasLigeiras = $this->objViatura->all()->where('Categoria', '=' ,'ligeiro')->count();
         $totalViaturasPesadas = $this->objViatura->all()->where('Categoria', '=' ,'pesado')->count();
         $listaModelos = Modelo::select('id','nome')->get();
@@ -29,7 +32,9 @@ class ViaturaController extends Controller
         $listaCores= Cor::select('id','nome')->get();
         $viatura =  $this->objViatura->all();
         return view('dashboard.dashViatura', compact('viatura', 'listaModelos', 'listaTipos', 'listaCores', 'totalViaturas', 'totalViaturasLigeiras', 'totalViaturasPesadas'));
-
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -50,6 +55,7 @@ class ViaturaController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('AcessoAdmin')){
         $viatura = new Viatura();
         $viatura->tipo = $request->input('tipo');
         $viatura->modelo = $request->input('modelo');
@@ -58,6 +64,9 @@ class ViaturaController extends Controller
         $viatura->data = now();
         $viatura->save();
         return redirect()->route('viatura');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -91,6 +100,7 @@ class ViaturaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('AcessoAdmin')){
         $viatura = Viatura::find($id);
         $viatura->tipo = $request->input('tipo');
         $viatura->modelo = $request->input('modelo');
@@ -98,6 +108,9 @@ class ViaturaController extends Controller
         $viatura->categoria = $request->input('categoria');
         $viatura->save();
         return redirect()->route('viatura');
+        }else{
+            return view('permission.permission');
+        }
     }
 
     /**
@@ -108,7 +121,11 @@ class ViaturaController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from viatura where id = ?', [$id]);
         return redirect()->route('viatura')->with('Sucess', 'eliminado');
+        }else{
+            return view('permission.permission');
+        }
     }
 }
