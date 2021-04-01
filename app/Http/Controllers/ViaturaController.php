@@ -63,7 +63,7 @@ class ViaturaController extends Controller
         $viatura->categoria = $request->input('categoria');
         $viatura->data = now();
         $viatura->save();
-        return redirect()->route('viatura');
+        return redirect()->route('viatura')->with('mensagem', 'Viatura adicionada com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -107,7 +107,7 @@ class ViaturaController extends Controller
         $viatura->cor = $request->input('cor');
         $viatura->categoria = $request->input('categoria');
         $viatura->save();
-        return redirect()->route('viatura');
+        return redirect()->route('viatura')->with('mensagem', 'Viatura eliminada com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -123,7 +123,7 @@ class ViaturaController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from viatura where id = ?', [$id]);
-        return redirect()->route('viatura')->with('Sucess', 'eliminado');
+        return redirect()->route('viatura')->with('mensagem', 'Viatura eliminada com sucesso!');
         }else{
             return view('permission.permission');
         }

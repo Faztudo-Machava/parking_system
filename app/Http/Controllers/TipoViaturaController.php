@@ -54,7 +54,7 @@ class TipoViaturaController extends Controller
         $tipo->descrição = $request->input('descricao');
         $tipo->data = now();
         $tipo->save();
-        return redirect()->route('tipo');
+        return redirect()->route('tipo')->with('mensagem', 'Tipo de viatura adicionado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -96,7 +96,7 @@ class TipoViaturaController extends Controller
         $tipo->nome = $request->input('nome');
         $tipo->descrição = $request->input('descricao');
         $tipo->save();
-        return redirect()->route('tipo');
+        return redirect()->route('tipo')->with('mensagem', 'Tipo de viatura atualizado com sucesso!');
         }
         else{
             return view('permission.permission');
@@ -113,7 +113,7 @@ class TipoViaturaController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from tipo_viatura where id = ?', [$id]);
-        return redirect()->route('tipo')->with('Sucess', 'eliminado');
+        return redirect()->route('tipo')->with('mensagem', 'Tipo de viatura eliminado com sucesso!');
         }
         else{
             return view('permission.permission');

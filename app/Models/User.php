@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function relParqueamento(){
         return $this->hasMany('App\Models\Parqueamento','utilizador');
     }
+
+    public function relLevantamento(){
+        return $this->hasMany('App\Models\Levantamento','levantamento');
+    }
 }

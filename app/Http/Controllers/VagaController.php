@@ -61,7 +61,7 @@ class VagaController extends Controller
         $vaga->descrição = $request->input('descricao');
         $vaga->data = now();
         $vaga->save();
-        return redirect()->route('vaga');
+        return redirect()->route('vaga')->with('mensagem', 'Vaga adicionada com sucesso');
         }else{
             return view('permission.permission');
         }
@@ -105,7 +105,7 @@ class VagaController extends Controller
         $vaga->categoria = $request->input('categoria');
         $vaga->descrição = $request->input('descricao');
         $vaga->save();
-        return redirect()->route('vaga');
+        return redirect()->route('vaga')->with('mensagem', 'Vaga atualizada com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -121,7 +121,7 @@ class VagaController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from vaga where id = ?', [$id]);
-        return redirect()->route('vaga')->with('Sucess', 'eliminado');
+        return redirect()->route('vaga')->with('mensagem', 'Vaga eliminada com sucesso!');
         }else{
             return view('permission.permission');
         }

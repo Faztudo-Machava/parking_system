@@ -59,7 +59,7 @@ class ClienteController extends Controller
         $cliente->saldo = $request->input('saldo');
         $cliente->data = now();
         $cliente->save();
-        return redirect()->route('cliente');
+        return redirect()->route('cliente')->with('mensagem', 'Cliente adicionado com sucesso!');;
         }else{
             return view('permission.permission');
         }
@@ -104,7 +104,7 @@ class ClienteController extends Controller
         $cliente->genero = $request->input('genero');
         $cliente->saldo = $request->input('saldo');
         $cliente->save();
-        return redirect('/cliente')->with('Sucess', 'Atualizado');
+        return redirect('/cliente')->with('mensagem', 'Cliente atualizado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -120,7 +120,7 @@ class ClienteController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from cliente where id = ?', [$id]);
-        return redirect('/cliente')->with('Sucess', 'eliminado');
+        return redirect('/cliente')->with('mensagem', 'Eliminado com sucesso!');
         }else{
             return view('permission.permission');
         }

@@ -117,7 +117,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="lblModelAdd">Eliminar cliente</h5>
+                    <h5 class="modal-title" id="lblModelAdd">Eliminar parqueamento</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formDelParqueamento" action="/delParqueamento" method="POST">
@@ -170,41 +170,51 @@
                     </div>
                 </div>
             </div>
-            @if(Gate::allows('AcessoAdmin'))
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="text-center col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total de vagas livres para Ligeiro</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalVagasLivresLigeiro }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="text-center col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total de vagas livres para Pesado</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalVagasLivresPesado }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            @if (Gate::allows('AcessoAdmin'))
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="text-center col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total de vagas livres para Ligeiro</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalVagasLivresLigeiro }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="text-center col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total de vagas livres para Pesado</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalVagasLivresPesado }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{$error}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endforeach
+        @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Tabela de parqueamentos</h6>
@@ -218,10 +228,11 @@
                                 <th>Cliente</th>
                                 <th>Viatura</th>
                                 <th>Vaga</th>
-                                @if(Gate::allows('AcessoAdmin'))
-                                <th>Utilizador</th>
+                                @if (Gate::allows('AcessoAdmin'))
+                                    <th>Utilizador</th>
                                 @endif
                                 <th>Data de parqueamento</th>
+                                <th>Estado do parqueamento</th>
                                 @if (Gate::allows('AcessoAdmin'))
                                     <th>Acções</th>
                                 @endif
@@ -233,10 +244,11 @@
                                 <th>Cliente</th>
                                 <th>Viatura</th>
                                 <th>Vaga</th>
-                                @if(Gate::allows('AcessoAdmin')){
-                                <th>Utilizador</th>
+                                @if (Gate::allows('AcessoAdmin')){
+                                    <th>Utilizador</th>
                                 @endif
                                 <th>Data de parqueamento</th>
+                                <th>Estado do parqueamento</th>
                                 @if (Gate::allows('AcessoAdmin'))
                                     <th>Acções</th>
                                 @endif
@@ -253,15 +265,17 @@
                                 <tr>
                                     <th scope="row">{{ $parqueamentos->id }}</th>
                                     <td>{{ $cliente->nome }}</td>
-                                    <td>{{ $viatura->nome }}</td>
+                                    <td>{{ $viatura->id }}</td>
                                     <td>{{ $vaga->nome }}</td>
                                     @if (Gate::allows('AcessoAdmin'))
-                                    <td>{{ $utilizador->Nome }}</td>
+                                        <td>{{ $utilizador->Nome }}</td>
                                     @endif
                                     <td>{{ $parqueamentos->data }}</td>
+                                    <td>{{$parqueamentos->estado == 1? 'Pendente':'Pago'}}</td>
                                     @if (Gate::allows('AcessoAdmin'))
                                         <td>
-                                            <a href="#" class="btn btn-primary btnEditar"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="#" class="btn btn-primary btnEditar"><i
+                                                    class="bi bi-pencil-square"></i></a>
                                             <a href="#" class="btn btn-danger btnEliminar"><i class="bi bi-trash"></i></a>
                                         </td>
                                     @endif

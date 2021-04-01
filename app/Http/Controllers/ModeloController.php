@@ -57,7 +57,7 @@ class ModeloController extends Controller
         $modelo->fabricante = $request->input('fabricante');
         $modelo->data = now();
         $modelo->save();
-        return redirect()->route('modelo');
+        return redirect()->route('modelo')->with('mensagem', 'Modelo adicionado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -100,7 +100,7 @@ class ModeloController extends Controller
         $modelo->descrição = $request->input('descricao');
         $modelo->fabricante = $request->input('fabricante');
         $modelo->save();
-        return redirect()->route('modelo');
+        return redirect()->route('modelo')->with('mensagem', 'Modelo atualizado com sucesso!');;
         }else{
             return view('permission.permission');
         }
@@ -116,7 +116,7 @@ class ModeloController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from modelo where id = ?', [$id]);
-        return redirect()->route('modelo')->with('Sucess', 'eliminado');
+        return redirect()->route('modelo')->with('mensagem', 'Modelo eliminado com sucesso!');
         }else{
             return view('permission.permission');
         }

@@ -89,7 +89,7 @@
                     <i class="bi bi-file-ppt"></i>
                     <span>Parqueamento</span>
                 </a>
-                <a class="nav-link " href="#" data-target="#collapseTwo" aria-expanded="true"
+                <a class="nav-link " href="{{route('levantamento')}}" data-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog">L</i>
                     <span>Levantamento</span>
@@ -179,7 +179,12 @@
 
                     </ul>
                 </nav>
-
+                @if (session('mensagem'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    session('mensagem')
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
                 @yield('conteudo')
             </div>
 

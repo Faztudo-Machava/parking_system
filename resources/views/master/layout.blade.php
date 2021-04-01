@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palvic</title>
+    <title>Verdant</title>
     <!--<link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">-->
     <link href="{{ asset('site/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
@@ -19,13 +19,15 @@
 
 <body>
     <!-- =============Formulario de criação de user================= -->
-
     <div class="modal fade" id="cadUsers" tabindex="-1" aria-labelledby="addUser" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addUser">Inscreve-se</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-info" role="alert">
+                    ANTENÇÃO: Para criar conta é necessario que seja cliente do Palvic!
                 </div>
                 <form class="form" action="/addUtilizadorCliente" method="POST">
                     {{ csrf_field() }}
@@ -99,7 +101,7 @@
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
 
-            <h1 class="logo"><a href="{{ route('home') }}">Palvic</a></h1>
+            <h1 class="logo"><a href="{{ route('home') }}">Verdant</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -111,8 +113,7 @@
                     <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
                     <li><button type="submit" class="btn" data-bs-toggle="modal"
                             data-bs-target="#cadUsers">Inscreva-se</button></li>
-                    <li><button type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#login">Iniciar
-                            sessão</button></li>
+                    <li><button type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#login">Iniciar sessão</button></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -130,7 +131,7 @@
                 <div class="row">
 
                     <div class="col-lg-5 col-md-6 footer-contact">
-                        <h3>Palvic</h3>
+                        <h3>Verdant</h3>
                         <p>
                             Av Maria de Lurdes <br>
                             Maputo<br>
@@ -178,14 +179,14 @@
 
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Palvic</span></strong>. Todos direitos reservados
+                    &copy; Copyright <strong><span>Verdant</span></strong>. Todos direitos reservados
                 </div>
                 <div class="credits">
                     <!-- All the links in the footer should remain intact. -->
                     <!-- You can delete the links only if you purchased the pro version. -->
                     <!-- Licensing information: https://bootstrapmade.com/license/ -->
                     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Designed by <a href="https://bootstrapmade.com/">MozerTech</a>
                 </div>
             </div>
             <div class="social-links text-center text-md-right pt-3 pt-md-0">
@@ -212,6 +213,13 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('js/Auth.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                alert('{{ $error }}')
+            </script>
+        @endforeach
+    @endif
 </body>
 
 </html>

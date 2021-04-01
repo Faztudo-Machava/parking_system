@@ -26,4 +26,8 @@ class Parqueamento extends Model
     public function relCliente(){
         return $this->hasOne('App\Models\Cliente','id','cliente');
     }
+
+    public function relLevantamento(){
+        return $this->hasMany('App\Models\Levantamento','parqueamento');
+    }
 }

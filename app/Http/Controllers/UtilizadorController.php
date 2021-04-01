@@ -63,7 +63,7 @@ class UtilizadorController extends Controller
         $utilizador->data = now();
         $utilizador->password = Hash::make($request->input('password'));
         $utilizador->save();
-        return redirect()->route('utilizador');
+        return redirect()->route('utilizador')->with('mensagem', 'Utilizador adicionado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -83,12 +83,12 @@ class UtilizadorController extends Controller
                 $valor = 1;
                 $utilizador->nome = $cliente->nome;
                 $utilizador->save();
-                return redirect()->route('home');
+                return redirect()->route('home')->withErrors('Conta criar com sucesso.');
             }
         };
         if($valor == 0){
-            echo "<script> alert('Ainda não é cliente do Palvic.') </script>";
-            return redirect()->route('home');
+            //echo "<script> alert() </script>";
+            return redirect()->route('home')->withErrors('Esse cliente não existe, para criar conta no sistema é necessario que seja cliente do Palvic. Entre em contacto com Parque para se tornar cliente.');
         }
     }
 
@@ -128,7 +128,7 @@ class UtilizadorController extends Controller
         $utilizador->nome = $request->input('nome');
         $utilizador->email = $request->input('email');
         $utilizador->save();
-        return redirect()->route('utilizador');
+        return redirect()->route('utilizador')->with('mensagem', 'Utilizador atuzlizado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -144,9 +144,20 @@ class UtilizadorController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from Utilizador where id = ?', [$id]);
-        return redirect()->route('utilizador')->with('Sucess', 'eliminado');
+        return redirect()->route('utilizador')->with('mensagem', 'Utilizador eliminado com sucesso!');
         }else{
             return view('permission.permission');
         }
+    }
+
+    public function adminDefault(){
+        $utilizador = new User();
+        $utilizador->nome = 'Faztudo Machava';
+        $utilizador->email = 'faztudo.machava@uem.ac.mz';
+        $utilizador->admin = 1;
+        $utilizador->data = now();
+        $utilizador->password = Hash::make('1234');
+        $utilizador->save();
+        return redirect()->route('home');
     }
 }

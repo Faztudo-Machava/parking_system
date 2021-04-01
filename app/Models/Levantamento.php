@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Levantamento extends Model
 {
     use HasFactory;
+
+    protected $table = 'levantamento';
+
+    public function relParqueamento(){
+        return $this->hasOne('App\Models\Parqueamento','id','parqueamento');
+    }
+
+    public function relUser(){
+        return $this->hasOne('App\Models\User','id','utilizador');
+    }
 }

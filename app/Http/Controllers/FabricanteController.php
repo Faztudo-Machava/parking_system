@@ -54,7 +54,7 @@ class FabricanteController extends Controller
         $fabricante->descrição = $request->input('descricao');
         $fabricante->data = now();
         $fabricante->save();
-        return redirect()->route('fabricante');
+        return redirect()->route('fabricante')->with('mensagem', 'Fabricante adicionado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -96,7 +96,7 @@ class FabricanteController extends Controller
         $fabricante->nome = $request->input('nome');
         $fabricante->descrição = $request->input('descricao');
         $fabricante->save();
-        return redirect()->route('fabricante');
+        return redirect()->route('fabricante')->with('mensagem', 'Fabricante adicionado com sucesso!');;
         }else{
             return view('permission.permission');
         }
@@ -112,7 +112,7 @@ class FabricanteController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from fabricante where id = ?', [$id]);
-        return redirect()->route('fabricante')->with('Sucess', 'eliminado');
+        return redirect()->route('fabricante')->with('mensagem', 'Fabricante eliminado com sucesso!');
         }else{
             return view('permission.permission');
         }

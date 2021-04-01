@@ -54,7 +54,7 @@ class CorController extends Controller
         $cor->descrição = $request->input('descricao');
         $cor->data = now();
         $cor->save();
-        return redirect()->route('cor');
+        return redirect()->route('cor')->with('mensagem', 'Cor adicionado com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -96,7 +96,7 @@ class CorController extends Controller
         $cor->nome = $request->input('nome');
         $cor->descrição = $request->input('descricao');
         $cor->save();
-        return redirect()->route('cor');
+        return redirect()->route('cor')->with('mensagem', 'Cor atualizada com sucesso!');
         }else{
             return view('permission.permission');
         }
@@ -112,7 +112,7 @@ class CorController extends Controller
     {
         if (Gate::allows('AcessoAdmin')){
         DB::delete('Delete from cor where id = ?', [$id]);
-        return redirect()->route('cor')->with('Sucess', 'eliminado');
+        return redirect()->route('cor')->with('mensagem', 'Cor eliminada com sucesso!');
         }else{
             return view('permission.permission');
         }

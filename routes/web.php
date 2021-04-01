@@ -6,7 +6,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UtilizadorController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CorController;
+use App\Http\Controllers\EnviarEmailController;
 use App\Http\Controllers\FabricanteController;
+use App\Http\Controllers\LevantamentoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\ParqueamentoController;
 use App\Http\Controllers\SessionController;
@@ -14,7 +16,6 @@ use App\Http\Controllers\TipoViaturaController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\ViaturaController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,12 @@ Route::get('/', [HomeController::class, 'homepage'])->name('home');
 /*============X=========== Home page ==================================*/
 
         /*======================== Utilizador routes ==================================*/
-            Route::get('/utilizador', [UtilizadorController::class, 'index'])->name('utilizador');
-            Route::post('/addUtilizadorAdmin', [UtilizadorController::class, 'storeAdmin'])->name('addUtilizador');
-            Route::delete('/delUtilizador/{id}', [UtilizadorController::class, 'destroy']);
+        Route::get('/utilizador', [UtilizadorController::class, 'index'])->name('utilizador');
+        Route::post('/addUtilizadorAdmin', [UtilizadorController::class, 'storeAdmin'])->name('addUtilizador');
+        Route::delete('/delUtilizador/{id}', [UtilizadorController::class, 'destroy']);
+        Route::post('/addUtilizadorCliente', [UtilizadorController::class, 'storeCliente'])->name('addUtilizador');
+        Route::put('/editUtilizador/{id}', [UtilizadorController::class, 'update']);
+        Route::get('/registarDefault', [UtilizadorController::class, 'adminDefault'])->name('adminDefault');
         /*============X=========== Utilizador routes ================X=================*/
 
         /*======================= Cliente routes =========================================*/
@@ -94,11 +98,16 @@ Route::get('/', [HomeController::class, 'homepage'])->name('home');
         Route::post('/addParqueamento', [ParqueamentoController::class, 'store'])->name('addParqueamento');
         Route::delete('/delParqueamento/{id}', [ParqueamentoController::class, 'destroy']);
         Route::put('/editParqueamento/{id}', [ParqueamentoController::class, 'update'])->name('editParqueamento');
+
+        Route::get('/parqueamento', [ParqueamentoController::class, 'index'])->name('parqueamento');
         /*=====================X============= Parqueamento routes ==================X==================*/
-/*======================== Utilizador routes ==================================*/
-Route::post('/addUtilizadorCliente', [UtilizadorController::class, 'storeCliente'])->name('addUtilizador');
-Route::put('/editUtilizador/{id}', [UtilizadorController::class, 'update']);
-/*============X=========== Utilizador routes ================X=================*/
+
+        /*=======================  Parqueamento routes =========================================*/
+        Route::post('/addLevantamento', [LevantamentoController::class, 'store'])->name('addLevantamento');
+        Route::delete('/delLevantamento/{id}', [LevantamentoController::class, 'destroy']);
+        Route::put('/editLevantamento/{id}', [LevantamentoController::class, 'update'])->name('editLevantamento');
+        Route::get('/levantamento', [LevantamentoController::class, 'index'])->name('levantamento');
+        /*=====================X============= Parqueamento routes ==================X==================*/
 
 /*======================= Authentication routes =========================================*/
 Auth::routes();
@@ -107,9 +116,17 @@ Route::post('/login', [AuthController::class, 'login'])->name('efectuarLogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 /*==============X============= Authentication routes ====================X====================*/
 
-Route::get('/parqueamento', [ParqueamentoController::class, 'index'])->name('parqueamento');
-
 /* ===================================== Session ========================================*/
 Route::get('session', [SessionController::class, 'session'])->name('session');
 /* ====================X=============== Session ====================X====================*/
 
+/*Route::get('/send-email', function(){
+    $details = [
+        'title' => 'Mail from Fasthy',
+        'body' => 'this i form testing email using smtp'
+    ];
+    \Mail::to('fasthymachava12@gmail.com')->send(new \App\Mail\ContactoMail($details));
+    echo "Email has been sent!";
+});*/
+
+//Route::post('/enviarEmail', [HomeController::class, 'enviar'])->name('enviarEmail');
