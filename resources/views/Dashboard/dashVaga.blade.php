@@ -26,7 +26,7 @@
                         </div>
                         <div class="mb-3 me-3">
                             <label for="txtValor" class="form-label">Valor</label>
-                            <input type="number" class="form-control" name="valor" required>
+                            <input type="number" class="form-control" name="valor" required placeholder="Mt/h">
                         </div>
                         <div class="mb-3">
                             <label for="jcCategoria" class="form-label">Categoria</label>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="mb-3 me-3">
                             <label for="txtValor" class="form-label">Valor</label>
-                            <input type="number" class="form-control" name="valor" id="txtValor" required>
+                            <input type="number" class="form-control" name="valor" id="txtValor" required placeholder="Mt/h">
                         </div>
                         <div class="mb-3">
                             <label for="jcCategoria" class="form-label">Categoria</label>

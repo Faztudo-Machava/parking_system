@@ -7,6 +7,7 @@ use App\Models\Levantamento;
 use App\Models\Parqueamento;
 use App\Models\Vaga;
 use App\Models\Viatura;
+use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -33,18 +34,18 @@ class LevantamentoController extends Controller
      */
     public function index()
     {
-        $listaParqueamentos = $this->objParqueamento->all();
+        $listaParqueamentos = $this->objParqueamento->all()->where('estado', '=', 1);
         if(Gate::allows('AcessoAdmin')){
             $totalParqueamentosAtivos = $this->objParqueamento->all()->where('estado', '=' ,1)->count();
             $levantamento = $this->objLevantamento->all();
             $totalLevantamento = $this->objLevantamento->all()->count();
             return view('dashboard.dashLevantamento', compact('levantamento','listaParqueamentos', 'totalParqueamentosAtivos','totalLevantamento'));
         } else{
-            //$cliente = DB::table('cliente')->where('email', '=', session('user')->email)->value('id');
-            $cliente = DB::table('cliente')->join('parqueamento', 'cliente.id','parqueamento.id')->value('cliente.id');
+            $cliente = DB::table('cliente')->where('email', '=', session('user')->email)->value('id');
+            $parqueamento = DB::table('parqueamento')->where('cliente', '=', $cliente)->value('id');
+            $levantamento = $this->objLevantamento->all()->where('parqueamento', '=', $parqueamento);
+            $totalLevantamento = $this->objLevantamento->all()->where('parqueamento', '=', $parqueamento)->count();
             $totalParqueamentosAtivos = $this->objParqueamento->all()->where('cliente', '=', $cliente)->where('estado', '=' ,1)->count();
-            $levantamento = $this->objLevantamento->all()->where('utilizador', '=', $cliente);
-            $totalLevantamento = $this->objLevantamento->all()->where('utilizador', '=', $cliente)->count();
             return view('dashboard.dashLevantamento', compact('levantamento','listaParqueamentos', 'totalParqueamentosAtivos','totalLevantamento'));
         }
     }
@@ -67,6 +68,7 @@ class LevantamentoController extends Controller
      */
     public function store(Request $request)
     {
+
         if (Gate::allows('AcessoAdmin')){
         $levantamento = new Levantamento();
         $levantamento->parqueamento = $request->input('parqueamento');
@@ -77,8 +79,11 @@ class LevantamentoController extends Controller
         DB::table('vaga')->where('id', '=', $vaga)->update(['estado' => 1]);
         DB::table('viatura')->where('id', '=', $viatura)->update(['estado' => 1]);
         DB::table('parqueamento')->where('id', '=', $levantamento->parqueamento)->update(['estado' => 0]);
+
+        /*Calculo do tempo e do valor correspondente ao parqueamento*/
+        $parkingDay = DB::table('parqueamento')->where('id', '=', $levantamento->parqueamento)->value('created_at');
         $levantamento->save();
-        return redirect()->route('levantamento')->with('mensagem', 'Levantamento efectuado com sucesso!');
+        return redirect()->route('levantamento')->with('mensagem', 'Levantamento efectuado com sucesso! ');
         }else{
             return view('permission.permission');
         }

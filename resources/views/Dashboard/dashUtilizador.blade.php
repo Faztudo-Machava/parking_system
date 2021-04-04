@@ -40,7 +40,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" disabled class="btn btn-primary">Adicionar</button>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
                     </div>
                 </div>
             </div>

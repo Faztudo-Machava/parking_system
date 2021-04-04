@@ -180,8 +180,8 @@
                     </ul>
                 </nav>
                 @if (session('mensagem'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    session('mensagem')
+                <div class="alert alert-success alert-dismissible fade show ml-4 me-4" role="alert">
+                    {{session('mensagem')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                 @endif
