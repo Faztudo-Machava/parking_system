@@ -204,7 +204,6 @@
         $(document).ready(function() {
             $('.table').DataTable();
         })
-
     </script>
     @stack('javascript')
     <!-- Core plugin JavaScript
