@@ -152,8 +152,8 @@ class UtilizadorController extends Controller
 
     public function adminDefault(){
         $utilizador = new User();
-        $utilizador->nome = 'Faztudo Machava';
-        $utilizador->email = 'faztudo.machava@uem.ac.mz';
+        $utilizador->nome = 'Admin';
+        $utilizador->email = 'admin@admin.com';
         $utilizador->admin = 1;
         $utilizador->data = now();
         $utilizador->password = Hash::make('1234');
