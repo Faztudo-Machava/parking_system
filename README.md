@@ -11,12 +11,12 @@
 This a parking system manager created to help learning Laravel framework
 
 ## How to use it
-After cloning it to the localhost
-1 - Install the depencies using the comand: Composer update;
-2 - Update the DataBase conection data at the .env file; 
-3 - Run the command: php artisan migrate
-4 - Run the command: php artisan serve
-5 - Go to the browser and open <a href="http://127.0.0.1:8000/">Verdant</a>
-6 - The acess this url <a href="http://127.0.0.1:8000/registarDefault">http://127.0.0.1:8000/registarDefault</a> is going to generate
-user admin with the following credentials credencials: Email - admin@admin.com & Password - 1234
-7 - Enjoy it.
+After cloning it to the localhost </br>
+1 - Install the depencies using the comand: Composer update; </br>
+2 - Update the DataBase conection data at the .env file; </br>
+3 - Run the command: php artisan migrate </br>
+4 - Run the command: php artisan serve </br>
+5 - Go to the browser and open <a href="http://127.0.0.1:8000/">Verdant</a> </br>
+6 - The acess this url <a href="http://127.0.0.1:8000/registarDefault">http://127.0.0.1:8000/registarDefault</a> is going to generate </br>
+user admin with the following credentials credencials: Email - admin@admin.com & Password - 1234 </br>
+7 - Enjoy it. </br>
